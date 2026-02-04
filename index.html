@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uday Connect - Professional Restaurant Telecalling Service</title>
+    <meta name="description" content="Professional telecalling service for restaurants. Handle orders, reservations, and customer support efficiently.">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+        
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Custom animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        /* Gradient backgrounds */
+        .gradient-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .gradient-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+        
+        /* Hover effects */
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Header styles */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .header.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .mobile-menu {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: block;
+            }
+            
+            .desktop-menu {
+                display: none;
+            }
+        }
+        
+        /* Floating buttons */
+        .floating-btn {
+            position: fixed;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .floating-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Section spacing */
+        section {
+            padding: 80px 0;
+        }
+        
+        @media (max-width: 768px) {
+            section {
+                padding: 60px 0;
+            }
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #667eea;
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #764ba2;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container mx-auto px-4 md:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo/Company Name -->
+                <div class="flex items-center">
+                    <a href="#" class="text-2xl md:text-3xl font-bold bg-gradient-to-r from-purple-600 to-purple-800 bg-clip-text text-transparent">
+                        Uday Connect
+                    </a>
+                    <span class="ml-2 text-sm text-gray-600 hidden md:inline"></span>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="desktop-menu">
+                    <ul class="flex items-center space-x-6">
+                        <li><a href="#problems" class="text-gray-700 hover:text-purple-600 transition-colors font-medium">Problems</a></li>
+                        <li><a href="#services" class="text-gray-700 hover:text-purple-600 transition-colors font-medium">Services</a></li>
+                        <li><a href="#how-it-works" class="text-gray-700 hover:text-purple-600 transition-colors font-medium">How It Works</a></li>
+                        <li><a href="#why-choose-us" class="text-gray-700 hover:text-purple-600 transition-colors font-medium">Why Us</a></li>
+                        <li><a href="#contact" class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition-colors font-medium">Contact</a></li>
+                    </ul>
+                </nav>
+                
+                <!-- Mobile Menu Button -->
+                <button class="mobile-menu text-gray-700 hover:text-purple-600 transition-colors" id="mobileMenuBtn">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation Menu -->
+        <div class="mobile-menu hidden bg-white border-t border-gray-200" id="mobileMenu">
+            <nav class="container mx-auto px-4 py-4">
+                <ul class="space-y-4">
+                    <li><a href="#problems" class="block text-gray-700 hover:text-purple-600 transition-colors font-medium py-2">Problems</a></li>
+                    <li><a href="#services" class="block text-gray-700 hover:text-purple-600 transition-colors font-medium py-2">Services</a></li>
+                    <li><a href="#how-it-works" class="block text-gray-700 hover:text-purple-600 transition-colors font-medium py-2">How It Works</a></li>
+                    <li><a href="#why-choose-us" class="block text-gray-700 hover:text-purple-600 transition-colors font-medium py-2">Why Us</a></li>
+                    <li><a href="#contact" class="block bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition-colors font-medium text-center">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/+919347227044" target="_blank" class="floating-btn bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-lg animate-float">
+        <i class="fab fa-whatsapp text-2xl"></i>
+    </a>
+    
+    <!-- Floating Call Button -->
+    <a href="tel:+14256893599" class="floating-btn bottom-6 right-24 bg-blue-500 text-white p-4 rounded-full shadow-lg animate-float" style="animation-delay: 0.5s;">
+        <i class="fas fa-phone text-xl"></i>
+    </a>
+    
+    <!-- Hero Section -->
+    <section class="gradient-hero text-white min-h-screen flex items-center relative overflow-hidden" style="padding-top: 80px;">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-20 left-20 w-72 h-72 bg-white rounded-full blur-3xl"></div>
+            <div class="absolute bottom-20 right-20 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 md:px-6 lg:px-8 relative z-10">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 animate-fade-in-up">
+                    Never Miss a Call Again.<br>
+                    <span class="text-yellow-300">Professional Telecalling for Restaurants</span>
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 text-gray-200 animate-fade-in-up" style="animation-delay: 0.2s;">
+                    Let our trained professionals handle your calls, orders, and reservations while you focus on what you do best – creating amazing food.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up" style="animation-delay: 0.4s;">
+                    <a href="tel:+14256893599" class="bg-white text-purple-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-yellow-300 transition-all duration-300 shadow-lg">
+                        <i class="fas fa-phone mr-2"></i> Call Now
+                    </a>
+                    <a href="https://wa.me/+919347227044" target="_blank" class="bg-green-500 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-green-600 transition-all duration-300 shadow-lg">
+                        <i class="fab fa-whatsapp mr-2"></i> WhatsApp Us
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <i class="fas fa-chevron-down text-2xl text-white opacity-70"></i>
+        </div>
+    </section>
+    
+    <!-- Problems We Solve Section -->
+    <section id="problems" class="bg-gray-50 py-20">
+        <div class="container mx-auto px-4 md:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Problems We Solve</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Restaurant owners face these challenges every day. We're here to help.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Problem Card 1 -->
+                <div class="bg-white p-8 rounded-xl shadow-md card-hover">
+                    <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-phone-slash text-red-500 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Missed Calls</h3>
+                    <p class="text-gray-600">Busy during peak hours? We ensure every call is answered, never losing a potential customer.</p>
+                </div>
+                
+                <!-- Problem Card 2 -->
+                <div class="bg-white p-8 rounded-xl shadow-md card-hover">
+                    <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-users text-orange-500 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Overwhelmed Staff</h3>
+                    <p class="text-gray-600">Your kitchen staff shouldn't be answering phones. Let them focus on cooking while we handle calls.</p>
+                </div>
+                
+                <!-- Problem Card 3 -->
+                <div class="bg-white p-8 rounded-xl shadow-md card-hover">
+                    <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-exclamation-triangle text-yellow-500 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Order Mistakes</h3>
+                    <p class="text-gray-600">Miscommunication leads to wrong orders. Our trained telecallers ensure accurate order taking every time.</p>
+                </div>
+                
+                <!-- Problem Card 4 -->
+                <div class="bg-white p-8 rounded-xl shadow-md card-hover">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-calendar-times text-blue-500 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Lost Reservations</h3>
+                    <p class="text-gray-600">No more double bookings or forgotten reservations. We manage your table bookings professionally.</p>
+                </div>
+                
+                <!-- Problem Card 5 -->
+                <div class="bg-white p-8 rounded-xl shadow-md card-hover">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-clock text-purple-500 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">24/7 Availability</h3>
+                    <p class="text-gray-600">Restaurants close, but customer inquiries don't. We're available round the clock to serve your customers.</p>
+                </div>
+                
+                <!-- Problem Card 6 -->
+                <div class="bg-white p-8 rounded-xl shadow-md card-hover">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-language text-green-500 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Language Barriers</h3>
+                    <p class="text-gray-600">Serve customers in multiple languages. Our multilingual team breaks down communication barriers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Our Services Section -->
+    <section id="services" class="bg-white py-20">
+        <div class="container mx-auto px-4 md:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Our Services</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Comprehensive telecalling solutions tailored for restaurants</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-8 rounded-xl card-hover text-center">
+                    <div class="w-20 h-20 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-utensils text-white text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Order Receiving</h3>
+                    <p class="text-gray-600">Professional order taking with accuracy and speed. We handle all your delivery and takeaway orders.</p>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-xl card-hover text-center">
+                    <div class="w-20 h-20 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-calendar-check text-white text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Table Reservations</h3>
+                    <p class="text-gray-600">Manage bookings efficiently. Confirm, modify, or cancel reservations with a professional touch.</p>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="bg-gradient-to-br from-green-50 to-green-100 p-8 rounded-xl card-hover text-center">
+                    <div class="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-headset text-white text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Customer Support</h3>
+                    <p class="text-gray-600">Handle inquiries, complaints, and feedback professionally. Keep your customers happy and satisfied.</p>
+                </div>
+                
+                <!-- Service 4 -->
+                <div class="bg-gradient-to-br from-orange-50 to-orange-100 p-8 rounded-xl card-hover text-center">
+                    <div class="w-20 h-20 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-redo text-white text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Follow-up Calls</h3>
+                    <p class="text-gray-600">Build customer loyalty through follow-up calls and repeat order reminders. Increase your repeat business.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="bg-gray-50 py-20">
+        <div class="container mx-auto px-4 md:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">How It Works</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Get started in three simple steps</p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Step 1 -->
+                    <div class="text-center relative">
+                        <div class="w-24 h-24 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                            <span class="text-white text-3xl font-bold">1</span>
+                        </div>
+                        <div class="hidden md:block absolute top-12 left-full w-full h-1 bg-purple-300 transform translate-x-4"></div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3">Contact Us</h3>
+                        <p class="text-gray-600">Reach out via call, WhatsApp, or fill our contact form. We'll understand your requirements.</p>
+                    </div>
+                    
+                    <!-- Step 2 -->
+                    <div class="text-center relative">
+                        <div class="w-24 h-24 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                            <span class="text-white text-3xl font-bold">2</span>
+                        </div>
+                        <div class="hidden md:block absolute top-12 left-full w-full h-1 bg-blue-300 transform translate-x-4"></div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3">Setup & Training</h3>
+                        <p class="text-gray-600">We integrate with your system, train our team on your menu, and set up the process.</p>
+                    </div>
+                    
+                    <!-- Step 3 -->
+                    <div class="text-center">
+                        <div class="w-24 h-24 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                            <span class="text-white text-3xl font-bold">3</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-3">Start Receiving Calls</h3>
+                        <p class="text-gray-600">We start handling your calls professionally. You focus on food, we handle the rest!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Why Choose Us Section -->
+    <section id="why-choose-us" class="bg-white py-20">
+        <div class="container mx-auto px-4 md:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Why Choose Us</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Trusted by restaurants across the country</p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Feature 1 -->
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0 w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-user-graduate text-purple-500 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2">Trained Telecallers</h3>
+                            <p class="text-gray-600">Our team undergoes rigorous training in restaurant operations, menu knowledge, and customer service.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Feature 2 -->
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-store text-blue-500 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2">Restaurant-Focused</h3>
+                            <p class="text-gray-600">We specialize exclusively in restaurant telecalling. We understand your industry inside out.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Feature 3 -->
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0 w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-rupee-sign text-green-500 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2">Affordable Pricing</h3>
+                            <p class="text-gray-600">Competitive rates that fit your budget. No hidden charges, transparent pricing structure.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Feature 4 -->
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0 w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-globe text-orange-500 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2">Multi-Language Support</h3>
+                            <p class="text-gray-600">Serve customers in Hindi, English, and regional languages. Break communication barriers.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Feature 5 -->
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0 w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-clock text-red-500 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2">24/7 Availability</h3>
+                            <p class="text-gray-600">Round-the-clock service. Never miss a call, even during late-night hours or holidays.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Feature 6 -->
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0 w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-chart-line text-yellow-500 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2">Detailed Reports</h3>
+                            <p class="text-gray-600">Get daily reports on calls, orders, reservations, and customer feedback. Track your growth.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact / Lead Section -->
+    <section id="contact" class="gradient-hero py-20">
+        <div class="container mx-auto px-4 md:px-6 lg:px-8">
+            <div class="max-w-3xl mx-auto">
+                <div class="text-center mb-12 text-white">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Get Started Today</h2>
+                </div>
+                    
+                    <div class="mt-8 pt-8 border-t border-gray-200">
+                        <div class="flex flex-col md:flex-row items-center justify-center gap-6 text-center">
+                            <a href="tel:+1234567890" class="flex items-center text-gray-700 hover:text-purple-600 transition-colors">
+                                <i class="fas fa-phone text-xl mr-3"></i>
+                                <span class="font-semibold">+1 425 689-3599</span>
+                            </a>
+                            <a href="mailto:info@udayconnect.in" class="flex items-center text-gray-700 hover:text-purple-600 transition-colors">
+                                <i class="fas fa-envelope text-xl mr-3"></i>
+                                <span class="font-semibold">hiudayconnect@gmail.com</span>
+                            </a>
+                            <a href="https://wa.me/+919347227044" target="_blank" class="flex items-center text-green-600 hover:text-green-700 transition-colors">
+                                <i class="fab fa-whatsapp text-xl mr-3"></i>
+                                <span class="font-semibold">WhatsApp Us</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4 md:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Uday Connect</h3>
+                    <p class="text-gray-400">Professional telecalling solutions for restaurants. Handle calls, orders, and reservations efficiently.</p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#problems" class="text-gray-400 hover:text-white transition-colors">Problems We Solve</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white transition-colors">Our Services</a></li>
+                        <li><a href="#how-it-works" class="text-gray-400 hover:text-white transition-colors">How It Works</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition-colors">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contact Info</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-center">
+                            <i class="fas fa-phone mr-3 text-purple-400"></i>
+                            <a href="tel:+14256893599" class="text-gray-400 hover:text-white transition-colors">+1 (234) 567-890</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-3 text-purple-400"></i>
+                            <a href="mailto:hiudayconnect@gmail.com" class="text-gray-400 hover:text-white transition-colors">info@restauranttelecall.com</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fab fa-whatsapp mr-3 text-green-400"></i>
+                            <a href="https://wa.me/+919347227044" target="_blank" class="text-gray-400 hover:text-white transition-colors">WhatsApp</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 Uday Connect. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script>
+        // Form submission handler
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const restaurant = document.getElementById('restaurant').value;
+            const phone = document.getElementById('phone').value;
+            
+            // Here you would typically send this data to your backend
+            // For now, we'll show an alert and create a WhatsApp message
+            const message = `Hello! I'm ${name} from ${restaurant}. My phone number is ${phone}. I'm interested in your telecalling service.`;
+            const whatsappUrl = `https://wa.me/1234567890?text=${encodeURIComponent(message)}`;
+            
+            // Show success message
+            alert('Thank you for your interest! Redirecting to WhatsApp...');
+            
+            // Open WhatsApp
+            window.open(whatsappUrl, '_blank');
+            
+            // Reset form
+            this.reset();
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all cards and sections
+        document.querySelectorAll('.card-hover, section > div').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+            observer.observe(el);
+        });
+        
+        // Header scroll effect
+        const header = document.getElementById('header');
+        let lastScroll = 0;
+        
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            // Add scrolled class to header
+            if (currentScroll > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+            
+            // Hide/show floating buttons on scroll
+            const floatingBtns = document.querySelectorAll('.floating-btn');
+            if (currentScroll > lastScroll && currentScroll > 200) {
+                floatingBtns.forEach(btn => {
+                    btn.style.opacity = '0.7';
+                });
+            } else {
+                floatingBtns.forEach(btn => {
+                    btn.style.opacity = '1';
+                });
+            }
+            
+            lastScroll = currentScroll;
+        });
+        
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (mobileMenu.classList.contains('hidden')) {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            } else {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            }
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('#mobileMenu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            });
+        });
+        
+        // Add click tracking (optional - for analytics)
+        document.querySelectorAll('a[href^="tel:"], a[href*="wa.me"]').forEach(link => {
+            link.addEventListener('click', function() {
+                // Track click event here if needed
+                console.log('Contact link clicked:', this.href);
+            });
+        });
+    </script>
+</body>
+</html>
